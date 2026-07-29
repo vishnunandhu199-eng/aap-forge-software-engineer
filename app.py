@@ -10,7 +10,6 @@ from flask import Flask, jsonify, redirect, render_template, request, url_for
 from flask_login import LoginManager, UserMixin, current_user, login_required, login_user, logout_user
 from itsdangerous import BadSignature, SignatureExpired, URLSafeTimedSerializer
 from werkzeug.security import check_password_hash, generate_password_hash
-from flask_socketio import SocketIO
 import firebase_admin
 from firebase_admin import credentials, firestore
 BASE_DIR = Path(__file__).resolve().parent.parent
