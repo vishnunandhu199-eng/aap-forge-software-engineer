@@ -5,6 +5,7 @@ from urllib.parse import urlparse
 
 import requests
 from dotenv import load_dotenv
+import json
 from flask import Flask, jsonify, redirect, render_template, request, url_for
 from flask_login import LoginManager, UserMixin, current_user, login_required, login_user, logout_user
 from itsdangerous import BadSignature, SignatureExpired, URLSafeTimedSerializer
@@ -15,7 +16,8 @@ from firebase_admin import credentials, firestore
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / ".env")
 DEFAULT_DB_PATH = BASE_DIR / "tasks.db"
-cred = credentials.Certificate("firebase-key.json")
+firebase_key = os.environ.get("FIREBASE_KEY_JSON")
+cred = credentials.Certificate(json.loads(firebase_key))
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 print("Firebase Connected!")
