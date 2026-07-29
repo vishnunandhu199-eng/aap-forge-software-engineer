@@ -1,113 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>App Forge | Build and manage tasks effortlessly</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
-  </head>
-  <body class="landing-page">
-    <div class="page-shell">
-      <header class="nav-bar">
-        <div class="brand">App Forge</div>
-        <nav class="nav-links">
-          <a href="#features">Features</a>
-          <a href="#preview">Preview</a>
-          <a class="button button-outline" href="{{ url_for('login') }}">Login</a>
-        </nav>
-      </header>
+<html>
+<head>
+  <title>App-Forge</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
 
-      <main class="hero-section">
-        <div class="hero-copy">
-          <p class="eyebrow">Task management, reimagined</p>
-          <h1>Build and manage tasks effortlessly</h1>
-          <p class="hero-text">Organize your work, track progress, and stay productive with a beautiful task dashboard.</p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="{{ url_for('register') }}">Get Started Free</a>
-            <a class="button button-outline" href="{{ url_for('login') }}">Login</a>
-          </div>
-        </div>
+  <nav class="bg-white shadow-md p-4 flex justify-between">
+    <h1 class="text-2xl font-bold text-blue-600">App-Forge</h1>
+    <a href="login.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg">Login</a>
+  </nav>
 
-        <div class="hero-visual">
-          <div class="visual-card">
-            <div class="visual-header">
-              <div class="line-dot"></div>
-              <div class="line-bar"></div>
-            </div>
-            <div class="visual-body">
-              <div class="status-pill">Active workspace</div>
-              <h2>Today's tasks</h2>
-              <ul class="preview-list">
-                <li><span>Launch onboarding flow</span><strong>In progress</strong></li>
-                <li><span>Design audit checklist</span><strong>Done</strong></li>
-                <li><span>Team sync at 3 PM</span><strong>Scheduled</strong></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </main>
+  <section class="text-center py-20">
+    <h1 class="text-5xl font-bold mb-4">Build and manage tasks effortlessly</h1>
+    <p class="text-gray-600 text-lg mb-8">Your personal task manager</p>
+    <a href="login.html" class="bg-blue-600 text-white px-8 py-3 rounded-lg text-lg">Start Now</a>
+  </section>
 
-      <section class="section-block" id="features">
-        <p class="section-label">What you get</p>
-        <h2>Everything teams need to move faster.</h2>
-        <div class="feature-grid">
-          <article class="feature-card premium">
-            <div class="feature-icon">🔒</div>
-            <h3>Authentication &amp; Security</h3>
-            <p>Secure login and user accounts to keep your workspace private and protected.</p>
-          </article>
-          <article class="feature-card premium">
-            <div class="feature-icon">⚡</div>
-            <h3>Real-time Task Dashboard</h3>
-            <p>Add, edit, and track tasks instantly without waiting for refreshes.</p>
-          </article>
-          <article class="feature-card premium">
-            <div class="feature-icon">📱</div>
-            <h3>Responsive Design</h3>
-            <p>Works perfectly on mobile, tablet, and desktop so you can stay productive anywhere.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section-block preview-block" id="preview">
-        <div class="preview-copy">
-          <span class="section-label">Live Dashboard</span>
-          <h2>See your work flow in a clean, polished interface.</h2>
-          <p>Stay focused on what matters with a minimal task board that feels premium and effortless.</p>
-        </div>
-        <div class="dashboard-preview">
-          <div class="preview-topbar">
-            <span>All tasks</span>
-            <span class="preview-chip">Auto-sync</span>
-          </div>
-          <div class="preview-table">
-            <div class="preview-row header">
-              <span>Task</span>
-              <span>Status</span>
-            </div>
-            <div class="preview-row">
-              <span>Publish launch plan</span>
-              <span class="status done">Done</span>
-            </div>
-            <div class="preview-row">
-              <span>Review customer feedback</span>
-              <span class="status active">In progress</span>
-            </div>
-            <div class="preview-row">
-              <span>Finalize roadmap</span>
-              <span class="status pending">Pending</span>
-            </div>
-            <div class="preview-row">
-              <span>Sync with design team</span>
-              <span class="status pending">Pending</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <footer class="site-footer">
-        <p>App Forge · A premium task workspace for modern teams.</p>
-      </footer>
-    </div>
-  </body>
+</body>
 </html>
