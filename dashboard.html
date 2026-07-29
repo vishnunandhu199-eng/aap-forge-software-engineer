@@ -27,6 +27,34 @@
     <button id="addTaskBtn">+ Add New Task</button>
     <div id="taskList">Loading...</div>
 
+    <hr>
+<h3>📷 Image Upload</h3>
+<input type="file" id="imageInput">
+<button id="uploadBtn">Upload to ImgBB</button>
+<p id="uploadResult"></p>
+
+<script>
+const IMGBB_API_KEY = "214502d122e9435203d07d047839f7b8";
+
+document.getElementById('uploadBtn').onclick = async () => {
+  const file = document.getElementById('imageInput').files[0];
+  if(!file) return alert('Photo select cheyyi');
+  
+  let form = new FormData();
+  form.append('image', file);
+  document.getElementById('uploadResult').innerText = 'Uploading...';
+  
+  let res = await fetch('https://api.imgbb.com/1/upload?key='+IMGBB_API_KEY, {method:'POST', body:form});
+  let data = await res.json();
+  
+  if(data.success){
+    document.getElementById('uploadResult').innerHTML = 'Link: <a href="'+data.data.url+'" target="_blank">'+data.data.url+'</a>';
+  } else {
+    document.getElementById('uploadResult').innerText = 'Failed';
+  }
+}
+</script>
+
     <script>
         auth.onAuthStateChanged(user => {
             if (user) {
