@@ -6,3 +6,4 @@ flask-login==0.6.3
 google-cloud-firestore==2.18.0
 google-cloud-storage==2.18.2
 flask-socketio==5.3.6
+eventlet==0.35.2
