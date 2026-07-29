@@ -1,0 +1,14 @@
+{
+  "name": "app-forge-software-engineer",
+  "version": "1.0.0",
+  "description": "Starter project for Python, JavaScript, DSA, SQL, and GitHub workflows",
+  "main": "javascript/app.js",
+  "scripts": {
+    "start": "node javascript/app.js",
+    "check": "node --check javascript/app.js && node --check javascript/dsa.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "firebase": "^12.16.0"
+  }
+}

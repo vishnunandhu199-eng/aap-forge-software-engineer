@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: app-forge-dashboard
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn python.app:app
+    envVars:
+      - key: FLASK_SECRET_KEY
+        value: change-me
