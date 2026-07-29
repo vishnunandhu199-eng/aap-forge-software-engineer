@@ -1,49 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login | App Forge</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
-  </head>
-  <body>
-    <header class="site-header small-header">
-      <div class="brand">App Forge</div>
-      <nav>
-        <a href="{{ url_for('register') }}">Register</a>
-        <a href="{{ url_for('index') }}">Home</a>
-      </nav>
-    </header>
-
-    <main class="signup-shell">
-      <section class="signup-panel">
-        <section class="card auth-card">
-          <div class="card-heading">
-            <h1>Sign in</h1>
-            <p>Access your App Forge workspace and continue where you left off.</p>
-          </div>
-          {% if error %}
-            <div class="toast error-toast">{{ error }}</div>
-          {% endif %}
-          <form method="post" class="auth-form" autocomplete="off">
-            <label>
-              <span>Email</span>
-              <input name="email" type="email" placeholder="hello@example.com" required autocomplete="email" />
-            </label>
-            <label>
-              <span>Password</span>
-              <input name="password" type="password" placeholder="Password" required autocomplete="current-password" />
-            </label>
-            <button type="submit" class="btn btn-primary">Sign in</button>
-          </form>
-          <p class="help-text">
-            New here? <a href="{{ url_for('register') }}">Create an account</a>.
-          </p>
-          <p class="help-text">
-            Didn’t receive a verification email? <a href="{{ url_for('resend_verification') }}">Resend email</a>.
-          </p>
-        </section>
-      </section>
-    </main>
-  </body>
+<html>
+<head>
+  <title>Login - App-Forge</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="firebase-config.js"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+  <div class="bg-white p-8 rounded-xl shadow-lg w-96">
+    <h1 class="text-3xl font-bold text-center mb-6 text-blue-600">App-Forge Login</h1>
+    <input type="email" id="email" placeholder="Email" class="w-full border p-3 mb-4 rounded">
+    <input type="password" id="password" placeholder="Password" class="w-full border p-3 mb-4 rounded">
+    <button onclick="signup()" class="w-full bg-gray-300 p-3 rounded mb-2">Sign Up</button>
+    <button onclick="login()" class="w-full bg-blue-600 text-white p-3 rounded">Login</button>
+    <p id="msg" class="text-red-500 text-center mt-4"></p>
+  </div>
+<script>
+function signup(){ auth.createUserWithEmailAndPassword(email.value, password.value).then(()=>{ msg.innerText="Account created!" }).catch(e=>{ msg.innerText=e.message }) }
+function login(){ auth.signInWithEmailAndPassword(email.value, password.value).then(()=>{ window.location="dashboard.html" }).catch(e=>{ msg.innerText=e.message }) }
+</script>
+</body>
 </html>
