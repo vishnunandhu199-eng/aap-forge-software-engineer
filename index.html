@@ -1,16 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>App-Forge</title>
+  <meta charset="UTF-8">
+  <title>App Forge</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50 font-sans">
 
-  <div style="padding:20px; text-align:center">
-    <h1 style="font-size:40px; color:blue; font-weight:bold">App-Forge</h1>
-    <p style="font-size:20px; margin:20px 0">Build and manage tasks effortlessly</p>
-    <a href="login.html" style="background:blue; color:white; padding:15px 30px; border-radius:10px; text-decoration:none; font-size:18px">Get Started Free</a>
-  </div>
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-blue-600">App Forge</h1>
+      <div class="space-x-4">
+        <a href="#" class="text-gray-700">Features</a>
+        <a href="#" class="text-gray-700">Preview</a>
+        <a href="login.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Login</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="text-center py-20 px-4">
+    <p class="text-gray-500 mb-2">Task management, reimagined</p>
+    <h1 class="text-5xl font-bold mb-4">Build and manage tasks effortlessly</h1>
+    <p class="text-gray-600 mb-8">Organize your work, track progress, and stay productive</p>
+    <a href="login.html" class="bg-blue-600 text-white px-8 py-3 rounded-lg text-lg hover:bg-blue-700">Get Started Free</a>
+  </section>
+
+  <!-- Tasks -->
+  <section class="max-w-4xl mx-auto px-4 py-10">
+    <h2 class="text-2xl font-bold mb-4">Today's tasks</h2>
+    <div class="bg-white p-4 rounded-lg shadow">
+      <p>• Launch onboarding flow <span class="text-yellow-600">In progress</span></p>
+      <p>• Design audit checklist <span class="text-green-600">Done</span></p>
+      <p>• Team sync at 3 PM <span class="text-blue-600">Scheduled</span></p>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="bg-white py-16">
+    <div class="max-w-4xl mx-auto text-center px-4">
+      <h2 class="text-3xl font-bold mb-8">Everything teams need to move faster</h2>
+      <div class="grid grid-cols-2 gap-8">
+        <div>
+          <h3 class="font-bold text-xl mb-2">🔒 Authentication & Security</h3>
+          <p>Secure login and user accounts to keep your workspace private</p>
+        </div>
+        <div>
+          <h3 class="font-bold text-xl mb-2">⚡ Real-time Task Dashboard</h3>
+          <p>Add, edit, and track tasks instantly without waiting</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
 </body>
 </html>
