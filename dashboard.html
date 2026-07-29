@@ -1,61 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
-  </head>
-  <body>
-    <header class="site-header small-header">
-      <div class="brand">App Forge</div>
-      <nav>
-        <span class="nav-user">{{ username }}</span>
-        <a class="btn btn-secondary" href="{{ url_for('logout') }}">Logout</a>
-      </nav>
-    </header>
+<html>
+<head>
+  <title>Dashboard - App Forge</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+</head>
+<body class="bg-gray-100">
 
-    <main class="app-shell">
-      <section class="card dashboard-card">
-        <div class="topbar">
-          <div>
-            <h1>Dashboard</h1>
-            <p class="subtitle">Manage your tasks in one place.</p>
-          </div>
-        </div>
+  <!-- PAIKI NAVBAR -->
+  <div class="bg-white shadow p-4 flex justify-between">
+    <h1 class="text-2xl font-bold text-blue-600">App Forge</h1>
+    <button onclick="logout()" class="bg-red-500 text-white px-4 py-2 rounded">Logout</button>
+  </div>
 
-        <section class="summary-card" aria-label="Task overview">
-          <div>
-            <p class="summary-label">Task Overview</p>
-            <h2>{{ completed_count }} Completed</h2>
-          </div>
-          <div class="summary-pill">{{ pending_count }} Pending</div>
-        </section>
+  <!-- MADHYALO TASKS -->
+  <div class="max-w-3xl mx-auto p-6">
+    <button onclick="addTask()" class="bg-blue-600 text-white px-5 py-2 rounded mb-4">+ Add New Task</button>
+    <div id="taskList">Loading...</div>
+  </div>
 
-        <form id="task-form" class="task-form dashboard-form">
-          <input id="task-title" name="title" type="text" placeholder="Add a new task" required />
-          <button type="submit" class="btn btn-primary">Add Task</button>
-        </form>
+<script>
+const db = firebase.firestore();
+let currentUser;
 
-        <ul id="task-list" class="task-list">
-          {% if not tasks %}
-            <li class="task-item empty-state">No tasks yet. Add one above.</li>
-          {% else %}
-            {% for task in tasks %}
-              <li class="task-item{% if task.completed %} done{% endif %}" data-id="{{ task.id }}">
-                <span class="task-text">{{ task.title }}</span>
-                <div class="task-actions">
-                  <button class="small toggle">{% if task.completed %}Undo{% else %}Done{% endif %}</button>
-                  <button class="small delete">Delete</button>
-                </div>
-              </li>
-            {% endfor %}
-          {% endif %}
-        </ul>
-      </section>
-    </main>
+// Login check
+auth.onAuthStateChanged(user => {
+  if(user){ 
+    currentUser = user;
+    loadTasks();
+  } else { 
+    window.location = "login.html" 
+  }
+});
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="{{ url_for('static', filename='app.js') }}"></script>
-  </body>
+// Tasks chupinchadam
+function loadTasks(){
+  db.collection("tasks").where("uid", "==", currentUser.uid)
+  .onSnapshot(snapshot => {
+    taskList.innerHTML = "";
+    snapshot.forEach(doc => {
+      let task = doc.data();
+      taskList.innerHTML += `<div class="bg-white p-3 rounded shadow mb-2 flex justify-between">
+        ${task.text} 
+        <button onclick="deleteTask('${doc.id}')" class="text-red-500">Delete</button>
+      </div>`;
+    })
+  })
+}
+
+// Task add cheyyadam
+function addTask(){
+  let text = prompt("Kotha task enti?");
+  if(text){
+    db.collection("tasks").add({ text: text, uid: currentUser.uid })
+  }
+}
+
+// Task delete cheyyadam
+function deleteTask(id){
+  db.collection("tasks").doc(id).delete();
+}
+
+// Logout
+function logout(){ auth.signOut(); }
+</script>
+</body>
 </html>
