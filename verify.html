@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Email Verification | App Forge</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <main class="verify-shell">
+      <section class="verify-card">
+        <div class="card-heading">
+          <h1>{{ 'Verified' if verified else 'Oops' }}</h1>
+          {% if verified %}
+          <p>Your email is confirmed. Welcome to App Forge — your dashboard is ready.</p>
+          <a href="{{ url_for('dashboard') }}" class="btn btn-primary">Go to dashboard</a>
+          {% else %}
+          <p>We couldn't verify this link. You can try again or request a new verification email.</p>
+          <a href="{{ url_for('resend_verification') }}" class="btn btn-secondary">Resend verification</a>
+          {% endif %}
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

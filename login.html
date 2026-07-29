@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | App Forge</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <header class="site-header small-header">
+      <div class="brand">App Forge</div>
+      <nav>
+        <a href="{{ url_for('register') }}">Register</a>
+        <a href="{{ url_for('index') }}">Home</a>
+      </nav>
+    </header>
+
+    <main class="signup-shell">
+      <section class="signup-panel">
+        <section class="card auth-card">
+          <div class="card-heading">
+            <h1>Sign in</h1>
+            <p>Access your App Forge workspace and continue where you left off.</p>
+          </div>
+          {% if error %}
+            <div class="toast error-toast">{{ error }}</div>
+          {% endif %}
+          <form method="post" class="auth-form" autocomplete="off">
+            <label>
+              <span>Email</span>
+              <input name="email" type="email" placeholder="hello@example.com" required autocomplete="email" />
+            </label>
+            <label>
+              <span>Password</span>
+              <input name="password" type="password" placeholder="Password" required autocomplete="current-password" />
+            </label>
+            <button type="submit" class="btn btn-primary">Sign in</button>
+          </form>
+          <p class="help-text">
+            New here? <a href="{{ url_for('register') }}">Create an account</a>.
+          </p>
+          <p class="help-text">
+            Didn’t receive a verification email? <a href="{{ url_for('resend_verification') }}">Resend email</a>.
+          </p>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>

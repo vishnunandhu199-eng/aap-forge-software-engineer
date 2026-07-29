@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign up | App Forge</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <main class="signup-shell">
+      <section class="signup-panel">
+        <header class="signup-header">
+          <div class="brand-panel">
+            <span class="brand-mark">AF</span>
+            <div>
+              <p class="brand-label">App Forge</p>
+              <p class="brand-note">Build fast, launch cleaner.</p>
+            </div>
+          </div>
+
+          <div class="panel-intro">
+            <h1>Create your App Forge account</h1>
+            <p>Secure access to your workspace, instant onboarding, and email verification with a modern welcome flow.</p>
+          </div>
+        </header>
+
+        <section class="card auth-card">
+          {% if success %}
+          <div class="toast success-toast">{{ success_message }}</div>
+          {% endif %}
+          {% if error %}
+          <div class="toast error-toast">{{ error }}</div>
+          {% endif %}
+
+          <form method="post" class="auth-form" autocomplete="off">
+            <label>
+              <span>Name</span>
+              <input name="name" type="text" placeholder="Your name" autocomplete="name" />
+            </label>
+            <label>
+              <span>Email</span>
+              <input name="email" type="email" placeholder="hello@example.com" required autocomplete="email" />
+            </label>
+            <label>
+              <span>Password</span>
+              <input name="password" type="password" placeholder="Create a strong password" required autocomplete="new-password" />
+            </label>
+            <button type="submit" class="btn btn-primary">Create Account</button>
+          </form>
+
+          <p class="help-text">
+            Already have an account? <a href="{{ url_for('login') }}">Sign in</a>.
+          </p>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>

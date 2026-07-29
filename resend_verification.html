@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resend Verification | App Forge</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <main class="signup-shell">
+      <section class="signup-panel">
+        <section class="card auth-card">
+          <div class="card-heading">
+            <h1>Resend verification</h1>
+            <p>Enter the email address you used to sign up and we'll send a fresh confirmation email.</p>
+          </div>
+          {% if success %}
+            <div class="toast success-toast">{{ success_message }}</div>
+          {% endif %}
+          {% if error %}
+            <div class="toast error-toast">{{ error }}</div>
+          {% endif %}
+          <form method="post" class="auth-form" autocomplete="off">
+            <label>
+              <span>Email</span>
+              <input name="email" type="email" placeholder="hello@example.com" required autocomplete="email" />
+            </label>
+            <button type="submit" class="btn btn-primary">Resend email</button>
+          </form>
+          <p class="help-text">Already verified? <a href="{{ url_for('login') }}">Sign in</a>.</p>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>
