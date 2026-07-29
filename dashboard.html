@@ -1,71 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Dashboard - App Forge</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
-  <script src="firebase-config.js"></script>
+    <meta charset="UTF-8">
+    <title>Dashboard - App Forge</title>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    <style>
+        body { font-family: Arial; padding: 20px; background: #f4f4f4; }
+        .header { display: flex; justify-content: space-between; background: white; padding: 15px; border-radius: 8px; }
+        #addTaskBtn { background: blue; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin: 20px 0; }
+        #logoutBtn { background: red; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; }
+        .task { background: white; padding: 15px; margin: 10px 0; border-radius: 8px; }
+    </style>
 </head>
-<body class="bg-gray-100">
+<body>
+    <div class="header">
+        <h2>App Forge</h2>
+        <div>
+            <span id="userName">Loading...</span>
+            <button id="logoutBtn">Logout</button>
+        </div>
+    </div>
 
-  <!-- PAIKI NAVBAR -->
-  <div class="bg-white shadow p-4 flex justify-between">
-    <h1 class="text-2xl font-bold text-blue-600">App Forge</h1>
-    <button onclick="logout()" class="bg-red-500 text-white px-4 py-2 rounded">Logout</button>
-  </div>
-
-  <!-- MADHYALO TASKS -->
-  <div class="max-w-3xl mx-auto p-6">
-    <button onclick="addTask()" class="bg-blue-600 text-white px-5 py-2 rounded mb-4">+ Add New Task</button>
+    <button id="addTaskBtn">+ Add New Task</button>
     <div id="taskList">Loading...</div>
-  </div>
 
-<script>
-const db = firebase.firestore();
-let currentUser;
+    <script>
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                document.getElementById('userName').textContent = user.email;
+                loadTasks(user.uid);
+            } else {
+                window.location.href = 'index.html';
+            }
+        });
 
-// Login check
-auth.onAuthStateChanged(user => {
-  if(user){ 
-    currentUser = user;
-    loadTasks();
-  } else { 
-    window.location = "login.html" 
-  }
-});
+        function loadTasks(uid) {
+            db.collection("tasks").where("userId", "==", uid).onSnapshot(snapshot => {
+                const taskList = document.getElementById('taskList');
+                taskList.innerHTML = "";
+                if (snapshot.empty) {
+                    taskList.innerHTML = "<p>No tasks yet. Click '+ Add New Task'</p>";
+                }
+                snapshot.forEach(doc => {
+                    const task = doc.data();
+                    taskList.innerHTML += `<div class="task"><h3>${task.title}</h3></div>`;
+                });
+            });
+        }
 
-// Tasks chupinchadam
-function loadTasks(){
-  db.collection("tasks").where("uid", "==", currentUser.uid)
-  .onSnapshot(snapshot => {
-    taskList.innerHTML = "";
-    snapshot.forEach(doc => {
-      let task = doc.data();
-      taskList.innerHTML += `<div class="bg-white p-3 rounded shadow mb-2 flex justify-between">
-        ${task.text} 
-        <button onclick="deleteTask('${doc.id}')" class="text-red-500">Delete</button>
-      </div>`;
-    })
-  })
-}
+        document.getElementById('addTaskBtn').onclick = () => {
+            const title = prompt("Enter task name:");
+            if (title) {
+                db.collection("tasks").add({
+                    title: title,
+                    userId: auth.currentUser.uid,
+                    createdAt: new Date()
+                });
+            }
+        };
 
-// Task add cheyyadam
-function addTask(){
-  let text = prompt("Kotha task enti?");
-  if(text){
-    db.collection("tasks").add({ text: text, uid: currentUser.uid })
-  }
-}
-
-// Task delete cheyyadam
-function deleteTask(id){
-  db.collection("tasks").doc(id).delete();
-}
-
-// Logout
-function logout(){ auth.signOut(); }
-</script>
+        document.getElementById('logoutBtn').onclick = () => auth.signOut();
+    </script>
 </body>
 </html>
