@@ -1,46 +1,93 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>App Forge</title>
+  <title>App Forge - Pro Task Manager</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50 font-sans">
 
-  <!-- 1. NAVBAR -->
-  <nav class="bg-white shadow-md p-4">
-    <div class="max-w-6xl mx-auto flex justify-between">
-      <h1 class="text-2xl font-bold text-blue-600">App Forge</h1>
-      <a href="login.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg">Login</a>
+  <!-- 1. PRO NAVBAR -->
+  <nav class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-blue-600"><i class="fa-solid fa-rocket"></i> App Forge</h1>
+      <div class="space-x-6 hidden md:flex">
+        <a href="#features" class="text-gray-600 hover:text-blue-600">Features</a>
+        <a href="#pricing" class="text-gray-600 hover:text-blue-600">Pricing</a>
+      </div>
+      <a href="login.html" class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 font-semibold">Login</a>
     </div>
   </nav>
 
-  <!-- 2. BLUE GRADIENT HERO -->
-  <section class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-center py-24">
-    <p>Task management, reimagined</p>
-    <h1 class="text-5xl font-bold my-4">Build and manage tasks effortlessly</h1>
-    <a href="login.html" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-bold">Get Started Free</a>
+  <!-- 2. PRO HERO with Gradient + Pattern -->
+  <section class="bg-gradient-to-br from-blue-600 to-indigo-700 text-white text-center py-24 px-4">
+    <p class="mb-2 text-blue-200">Task management, reimagined</p>
+    <h1 class="text-5xl md:text-6xl font-extrabold mb-4">Build and manage tasks <br> effortlessly</h1>
+    <p class="text-lg mb-8 text-blue-100 max-w-2xl mx-auto">Organize your work, track progress, and stay productive with our real-time task manager</p>
+    <a href="login.html" class="bg-white text-blue-600 px-10 py-4 rounded-xl text-lg font-bold hover:bg-gray-100 shadow-2xl">Get Started Free</a>
   </section>
 
-  <!-- 3. TASK CARDS -->
+  <!-- 3. TODAY'S TASKS - PRO CARDS -->
   <section class="max-w-4xl mx-auto py-16 px-4">
-    <h2 class="text-3xl font-bold text-center mb-8">Today's tasks</h2>
-    <div class="bg-white p-5 rounded-xl shadow mb-4 flex justify-between">
-      <span>🚀 Launch onboarding flow</span>
-      <span class="bg-yellow-200 text-yellow-800 px-3 rounded-full">In progress</span>
-    </div>
-    <div class="bg-white p-5 rounded-xl shadow mb-4 flex justify-between">
-      <span>✅ Design audit checklist</span>
-      <span class="bg-green-200 text-green-800 px-3 rounded-full">Done</span>
-    </div>
-    <div class="bg-white p-5 rounded-xl shadow flex justify-between">
-      <span>👥 Team sync at 3 PM</span>
-      <span class="bg-blue-200 text-blue-800 px-3 rounded-full">Scheduled</span>
+    <h2 class="text-3xl font-bold text-center mb-10">Today's tasks</h2>
+    <div class="space-y-4">
+      <div class="bg-white p-5 rounded-2xl shadow-md border-l-4 border-yellow-400 flex justify-between items-center hover:shadow-lg transition">
+        <div><i class="fa-solid fa-pen-to-square text-yellow-500 mr-2"></i> Launch onboarding flow</div>
+        <span class="bg-yellow-100 text-yellow-700 px-4 py-1 rounded-full text-sm font-semibold">In progress</span>
+      </div>
+      <div class="bg-white p-5 rounded-2xl shadow-md border-l-4 border-green-400 flex justify-between items-center hover:shadow-lg transition">
+        <div><i class="fa-solid fa-circle-check text-green-500 mr-2"></i> Design audit checklist</div>
+        <span class="bg-green-100 text-green-700 px-4 py-1 rounded-full text-sm font-semibold">Done</span>
+      </div>
+      <div class="bg-white p-5 rounded-2xl shadow-md border-l-4 border-blue-400 flex justify-between items-center hover:shadow-lg transition">
+        <div><i class="fa-solid fa-users text-blue-500 mr-2"></i> Team sync at 3 PM</div>
+        <span class="bg-blue-100 text-blue-700 px-4 py-1 rounded-full text-sm font-semibold">Scheduled</span>
+      </div>
     </div>
   </section>
 
-  <!-- 4. FOOTER -->
-  <footer class="bg-gray-800 text-white text-center py-6">
-    <p>© 2026 App Forge. Made with ❤️</p>
+  <!-- 4. FEATURES SECTION -->
+  <section id="features" class="bg-white py-20">
+    <div class="max-w-6xl mx-auto text-center px-4">
+      <h2 class="text-4xl font-bold mb-4">Everything you need to move faster</h2>
+      <p class="text-gray-600 mb-12">Powerful features to help your team succeed</p>
+      <div class="grid md:grid-cols-3 gap-10">
+        <div class="p-6">
+          <i class="fa-solid fa-shield-halved text-4xl text-blue-600 mb-4"></i>
+          <h3 class="font-bold text-xl mb-2">Authentication & Security</h3>
+          <p class="text-gray-600">Secure login with Firebase Auth. Your data is encrypted and safe.</p>
+        </div>
+        <div class="p-6">
+          <i class="fa-solid fa-bolt text-4xl text-blue-600 mb-4"></i>
+          <h3 class="font-bold text-xl mb-2">Real-time Dashboard</h3>
+          <p class="text-gray-600">Add, edit, delete tasks instantly. No page reload needed.</p>
+        </div>
+        <div class="p-6">
+          <i class="fa-solid fa-mobile-screen text-4xl text-blue-600 mb-4"></i>
+          <h3 class="font-bold text-xl mb-2">Fully Responsive</h3>
+          <p class="text-gray-600">Works perfectly on Mobile, Tablet and Desktop.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. PRICING SECTION -->
+  <section id="pricing" class="py-20">
+    <div class="max-w-4xl mx-auto text-center px-4">
+      <h2 class="text-4xl font-bold mb-4">Simple, Transparent Pricing</h2>
+      <div class="bg-white p-10 rounded-2xl shadow-2xl mt-8 border-2 border-blue-600">
+        <h3 class="text-2xl font-bold">Free Plan</h3>
+        <p class="text-5xl font-bold my-4">$0<span class="text-lg">/month</span></p>
+        <p class="text-gray-600 mb-6">Perfect for individuals and small teams</p>
+        <a href="login.html" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-bold">Start Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. PRO FOOTER -->
+  <footer class="bg-gray-900 text-gray-400 text-center py-10">
+    <h1 class="text-2xl font-bold text-white mb-2"><i class="fa-solid fa-rocket"></i> App Forge</h1>
+    <p>© 2026 App Forge. Built with Firebase + Tailwind CSS</p>
   </footer>
 
 </body>
