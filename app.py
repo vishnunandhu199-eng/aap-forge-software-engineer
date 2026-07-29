@@ -5,6 +5,8 @@ import sqlite3
 import firebase_admin
 from firebase_admin import credentials
 from flask import Flask, request, jsonify
+from firebase_admin import firestore
+from urllib.parse import urlparse
 
 app = Flask(__name__)
 
