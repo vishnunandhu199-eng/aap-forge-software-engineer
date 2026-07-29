@@ -1,21 +1,15 @@
 import os
-import sqlite3
-from pathlib import Path
-from urllib.parse import urlparse
-
-import requests
-from dotenv import load_dotenv
 import json
-from flask import Flask, jsonify, redirect, render_template, request, url_for
-from flask_login import LoginManager, UserMixin, current_user, login_required, login_user, logout_user
-from itsdangerous import BadSignature, SignatureExpired, URLSafeTimedSerializer
-from werkzeug.security import check_password_hash, generate_password_hash
+import base64
+import sqlite3
 import firebase_admin
-from firebase_admin import credentials, firestore
-BASE_DIR = Path(__file__).resolve().parent.parent
-load_dotenv(BASE_DIR / ".env")
-DEFAULT_DB_PATH = BASE_DIR / "tasks.db"
-firebase_key = os.environ.get("FIREBASE_KEY_JSON")
+from firebase_admin import credentials
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+firebase_key_base64 = os.environ.get('FIREBASE_CREDENTIALS_BASE64')
+firebase_key = base64.b64decode(firebase_key_base64).decode('utf-8')
 cred = credentials.Certificate(json.loads(firebase_key))
 firebase_admin.initialize_app(cred)
 db = firestore.client()
